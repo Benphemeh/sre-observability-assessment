@@ -84,6 +84,3 @@ config:
         receivers: [otlp]
         processors: [memory_limiter, batch]
         exporters: [otlphttp/elastic]
-
-      metrics:
-        level: none
