@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: paymentservice
 spec:
+  selector:
+    matchLabels:
+      app: paymentservice
   template:
     metadata:
       annotations:
