@@ -1,0 +1,47 @@
+[
+  {
+    "id": "alert-cpu-high",
+    "type": "alert",
+    "attributes": {
+      "name": "High CPU Usage (>85%)",
+      "description": "CPU sustained above 85% for 5 minutes",
+      "ruleTypeId": "metrics.alert.threshold",
+      "schedule": { "interval": "1m" },
+      "params": {
+        "criteria": [
+          { "metric": "kubernetes.node.cpu.usage.node.pct", "comparator": ">", "threshold": [0.85], "timeWindow": "5m" }
+        ]
+      }
+    }
+  },
+  {
+    "id": "alert-redis-memory",
+    "type": "alert",
+    "attributes": {
+      "name": "Redis Memory Pressure",
+      "description": "Redis memory approaching maxmemory (>85%)",
+      "ruleTypeId": "metrics.alert.threshold",
+      "schedule": { "interval": "1m" },
+      "params": {
+        "criteria": [
+          { "metric": "redis.info.memory.used.pct", "comparator": ">", "threshold": [0.85] }
+        ]
+      }
+    }
+  },
+  {
+    "id": "alert-nginx-5xx",
+    "type": "alert",
+    "attributes": {
+      "name": "NGINX 5xx Error Rate Spike",
+      "description": "NGINX 5xx error rate >5% of requests over 2 mins",
+      "ruleTypeId": "metrics.alert.threshold",
+      "schedule": { "interval": "1m" },
+      "params": {
+        "criteria": [
+          { "metric": "nginx.stubstatus.dropped", "comparator": ">", "threshold": [5], "timeWindow": "2m" }
+        ]
+      }
+    }
+  }
+]

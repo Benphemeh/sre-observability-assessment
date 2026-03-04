@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metricbeat-postgres-config
+  namespace: default
+data:
+  postgres.yml: |-
+    - module: postgresql
+      metricsets:
+        - database
+        - bgwriter
+        - activity
+        - connection
+      period: 10s
+      # Assuming a postgres service named 'postgresql' with default credentials
+      hosts: ["postgres://postgres:password@postgresql:5432?sslmode=disable"]
