@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sre-business-transactions",
+    "type": "dashboard",
+    "attributes": {
+      "title": "SRE: Business Transaction Monitoring",
+      "description": "Checkout funnel, revenue correlation, and cart abandonment metrics",
+      "panelsJSON": "[{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":0,\"w\":12,\"h\":10,\"i\":\"1\"},\"panelRefName\":\"panel_1\",\"title\":\"Checkout Funnel Conversion (Browse -> Cart -> Checkout)\"},{\"version\":\"8.0.0\",\"gridData\":{\"x\":12,\"y\":0,\"w\":12,\"h\":10,\"i\":\"2\"},\"panelRefName\":\"panel_2\",\"title\":\"Revenue vs P95 Checkout Latency Overlay\"},{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":10,\"w\":24,\"h\":8,\"i\":\"3\"},\"panelRefName\":\"panel_3\",\"title\":\"Cart Abandonment Indicator\"}]",
+      "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"strictPayload\":false}",
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
+      }
+    }
+  }
+]

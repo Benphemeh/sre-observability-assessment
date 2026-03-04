@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metricbeat-redis-config
+  namespace: default
+data:
+  redis.yml: |-
+    - module: redis
+      metricsets:
+        - info
+        - keyspace
+      period: 10s
+      hosts: ["redis-cart:6379"]
+      
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metricbeat-nginx-config
+  namespace: ingress-nginx
+data:
+  nginx.yml: |-
+    - module: nginx
+      metricsets: ["stubstatus"]
+      period: 10s
+      hosts: ["http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:10254"]
+      server_status_path: "nginx_status"

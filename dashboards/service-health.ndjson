@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sre-service-health-overview",
+    "type": "dashboard",
+    "attributes": {
+      "title": "SRE: Service Health Overview",
+      "description": "RED metrics, Service Dependency, and Error Trends for Online Boutique",
+      "panelsJSON": "[{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":0,\"w\":24,\"h\":12,\"i\":\"1\"},\"panelRefName\":\"panel_1\",\"title\":\"Service Rate & Errors (RED Metrics)\"},{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":12,\"w\":24,\"h\":12,\"i\":\"2\"},\"panelRefName\":\"panel_2\",\"title\":\"Service Dependency Map / Latency Breakdown\"}]",
+      "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"strictPayload\":false}",
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
+      }
+    }
+  }
+]

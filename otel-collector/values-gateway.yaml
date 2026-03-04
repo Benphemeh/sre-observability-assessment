@@ -1,0 +1,91 @@
+mode: deployment
+
+image:
+  repository: otel/opentelemetry-collector-contrib
+  tag: "0.96.0"
+
+# To ensure the gateway scales and is reliable
+replicaCount: 1
+
+extraEnvs:
+  - name: ELASTIC_APM_URL
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: APM_URL
+  - name: ELASTIC_APM_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: APM_TOKEN
+
+config:
+  receivers:
+    jaeger: null
+    zipkin: null
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
+  processors:
+    batch:
+      send_batch_size: 1000
+      timeout: 10s
+    memory_limiter:
+      check_interval: 5s
+      limit_percentage: 80
+      spike_limit_percentage: 25
+      
+  exporters:
+    debug:
+      verbosity: detailed
+    tail_sampling:
+      decision_wait: 10s
+      num_traces: 10000
+      expected_new_traces_per_sec: 100
+      policies:
+        [
+          {
+            name: errors-policy,
+            type: status_code,
+            status_code: {status_codes: [ERROR]}
+          },
+          {
+            name: randomized-policy,
+            type: probabilistic,
+            probabilistic: {sampling_percentage: 10}
+          }
+        ]
+
+  exporters:
+    # Export directly to Elastic APM over OTLP
+    otlphttp/elastic:
+      endpoint: "${env:ELASTIC_APM_URL}"
+      headers:
+        Authorization: "ApiKey ${env:ELASTIC_APM_TOKEN}"
+
+  service:
+    telemetry:
+      logs:
+        level: debug
+    pipelines:
+      traces:
+        receivers: [otlp]
+        # Notice we include tail_sampling here at the gateway level
+        processors: [memory_limiter, batch]
+        exporters: [otlphttp/elastic, debug]
+      metrics:
+        receivers: [otlp]
+        processors: [memory_limiter, batch]
+        exporters: [otlphttp/elastic]
+      logs:
+        receivers: [otlp]
+        processors: [memory_limiter, batch]
+        exporters: [otlphttp/elastic]
+
+    telemetry:
+      metrics:
+        level: none

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sre-rum-performance",
+    "type": "dashboard",
+    "attributes": {
+      "title": "SRE: Frontend / RUM Performance",
+      "description": "Core Web Vitals, Page Load Waterfall, and Session Errors",
+      "panelsJSON": "[{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":0,\"w\":12,\"h\":8,\"i\":\"1\"},\"panelRefName\":\"panel_1\",\"title\":\"Core Web Vitals (LCP, FID, CLS)\"},{\"version\":\"8.0.0\",\"gridData\":{\"x\":12,\"y\":0,\"w\":12,\"h\":8,\"i\":\"2\"},\"panelRefName\":\"panel_2\",\"title\":\"Page Load Latency (p50, p90, p99)\"},{\"version\":\"8.0.0\",\"gridData\":{\"x\":0,\"y\":8,\"w\":24,\"h\":12,\"i\":\"3\"},\"panelRefName\":\"panel_3\",\"title\":\"Geographic Distribution of Users\"}]",
+      "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"strictPayload\":false}",
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
+      }
+    }
+  }
+]
