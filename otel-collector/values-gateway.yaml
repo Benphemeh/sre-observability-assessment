@@ -39,9 +39,6 @@ config:
       limit_percentage: 80
       spike_limit_percentage: 25
       
-  exporters:
-    debug:
-      verbosity: detailed
     tail_sampling:
       decision_wait: 10s
       num_traces: 10000
@@ -61,6 +58,8 @@ config:
         ]
 
   exporters:
+    debug:
+      verbosity: detailed
     # Export directly to Elastic APM over OTLP
     otlphttp/elastic:
       endpoint: "${env:ELASTIC_APM_URL}"
@@ -86,6 +85,5 @@ config:
         processors: [memory_limiter, batch]
         exporters: [otlphttp/elastic]
 
-    telemetry:
       metrics:
         level: none
