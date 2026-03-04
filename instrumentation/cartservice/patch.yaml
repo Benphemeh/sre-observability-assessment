@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartservice
+spec:
+  template:
+    metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-dotnet: "true"
+    spec:
+      containers:
+        - name: server
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: cartservice
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: deployment.environment=production,service.version=1.0.0

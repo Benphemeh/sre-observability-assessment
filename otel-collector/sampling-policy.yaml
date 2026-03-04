@@ -1,0 +1,18 @@
+# This policy is embedded directly in values-gateway.yaml but extracted here for evaluator review.
+tail_sampling:
+  decision_wait: 10s
+  num_traces: 10000
+  expected_new_traces_per_sec: 100
+  policies:
+    [
+      {
+        name: errors-policy,
+        type: status_code,
+        status_code: {status_codes: [ERROR]}
+      },
+      {
+        name: randomized-policy,
+        type: probabilistic,
+        probabilistic: {sampling_percentage: 10}
+      }
+    ]
